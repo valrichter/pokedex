@@ -70,14 +70,35 @@ export class PokemonService {
 
   async update(id: string, updatePokemonDto: UpdatePokemonDto) {
     const pokemon = await this.findOne(id);
+
     if (updatePokemonDto.name) {
       updatePokemonDto.name = updatePokemonDto.name.toLocaleLowerCase();
     }
-    await pokemon.updateOne(updatePokemonDto, { new: true });
-    return { ...pokemon.toJSON(), ...updatePokemonDto };
+
+    try {
+      await pokemon.updateOne(updatePokemonDto, { new: true });
+      return { ...pokemon.toJSON(), ...updatePokemonDto };
+    } catch (error) {
+      this.handleExceptions(error);
+    }
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} pokemon`;
+  async remove(id: string) {
+    // const pokemon = await this.findOne(id);
+    // await pokemon.deleteOne();
+
+    return { id };
+  }
+
+  private handleExceptions(error: any) {
+    if (error.code === 11000) {
+      throw new BadRequestException(
+        `Pokemon already exists in database ${JSON.stringify(error.keyValue)} `,
+      );
+    }
+    console.log(error);
+    throw new InternalServerErrorException(
+      `Cant create pokemon - Check server logs`,
+    );
   }
 }
