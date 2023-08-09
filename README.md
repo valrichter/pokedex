@@ -6,13 +6,24 @@
 
 1. Clonar el repositorio
 2. Ejecutar
+
 ```
 yarn install
 ```
+
 3. Tener Nest CLI instalado
+
 ```
 npm i -g @nestjs/cli
 ```
+
+0. Si se ejecuta el devcontainer solo es necesario ejecutar en consola:
+
+```
+   yarn start:dev
+```
+
 ## Stack usado
-* Mongo
-* Nest
+
+- Mongo
+- Nest
