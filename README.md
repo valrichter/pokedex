@@ -17,7 +17,13 @@ yarn install
 npm i -g @nestjs/cli
 ```
 
-0. Si se ejecuta el devcontainer solo es necesario ejecutar en consola:
+4. Reconstruir BD con la seed
+
+```
+http://localhost:3000/api/v2/seed
+```
+
+5. Si se ejecuta el devcontainer solo es necesario ejecutar en consola:
 
 ```
    yarn start:dev
